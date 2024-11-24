@@ -9,7 +9,7 @@ vars:
 # env:
 #   BUILDKIT_PROGRESS: plain
 
-# silent: true
+silent: true
 
 tasks:
 
