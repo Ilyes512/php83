@@ -130,7 +130,7 @@ ARG COMPOSER_VERSION=2.8.3
 # Latest version of Xdebug: https://github.com/xdebug/xdebug/tags or https://pecl.php.net/package/xdebug
 ARG XDEBUG_VERSION=3.3.2
 # Latest version of pcov: https://github.com/krakjoe/pcov/tags or https://pecl.php.net/package/pcov
-ARG PCOV_VERSION=1.0.11
+ARG PCOV_VERSION=1.0.12
 
 RUN apt-get update \
     && apt-get install --assume-yes --no-install-recommends \
