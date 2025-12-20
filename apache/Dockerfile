@@ -190,7 +190,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG UNIQUE_ID_FOR_CACHEFROM=builder_nodejs
 
 # Latest version of Node.js: https://nodejs.org
-ARG NODE_MAJOR=22
+ARG NODE_MAJOR=24
 
 RUN apt-get update \
     && apt-get install --assume-yes --no-install-recommends \
@@ -208,7 +208,7 @@ RUN apt-get update \
     && apt-get install --assume-yes --no-install-recommends \
         nodejs \
     && npm uninstall --global npm \
-    && corepack install --global npm@10.x yarn@4.x pnpm@9.x \
+    && corepack install --global npm@11.x yarn@4.x pnpm@10.x \
     && corepack enable npm yarn pnpm \
     && apt-get autoremove --assume-yes \
     && apt-get clean --assume-yes \
