@@ -1,5 +1,5 @@
-# Latest version of PHP base image: https://hub.docker.com/_/php?tab=tags
-FROM php:8.3.27-apache-bookworm AS runtime
+# Latest version of PHP base image: https://hub.docker.com/_/php/tags
+FROM php:8.3.29-apache-trixie AS runtime
 
 ARG UNIQUE_ID_FOR_CACHEFROM=runtime
 
@@ -27,18 +27,18 @@ RUN apt-get update \
         curl \
         msmtp-mta \
         # Dependency of the PHP intl-extension
-        libicu72 \
+        libicu76 \
         # Dependency of the PHP gd-extension
-        libpng16-16 \
+        libpng16-16t64 \
         libwebp7 \
         libjpeg62-turbo \
         libfreetype6 \
         # Dependency of PHP zip-extension
-        libzip4 \
+        libzip5 \
         # Dependency of PHP event-extension
-        libevent-2.1-7 \
-        libevent-openssl-2.1-7 \
-        libevent-extra-2.1-7 \
+        libevent-2.1-7t64 \
+        libevent-openssl-2.1-7t64 \
+        libevent-extra-2.1-7t64 \
         # Dependency of PHP pdo_pgsql-extension
         libpq5 \
         # Dependency of PHP amqp-extension
@@ -46,7 +46,7 @@ RUN apt-get update \
         # Dependency of PHP xsl-extension
         libxslt1.1 \
         # Dependency of PHP memcached-extension
-        libmemcached11 \
+        libmemcached11t64 \
         zlib1g \
     # Install packages that are needed for building PHP extensions
     && apt-get install --assume-yes --no-install-recommends \
@@ -140,9 +140,9 @@ ARG UNIQUE_ID_FOR_CACHEFROM=builder
 # Latest version of Phive: https://api.github.com/repos/phar-io/phive/releases/latest
 ARG PHIVE_VERSION=0.16.0
 # Latest version of Composer: https://getcomposer.org/download
-ARG COMPOSER_VERSION=2.9.1
+ARG COMPOSER_VERSION=2.9.2
 # Latest version of Xdebug: https://github.com/xdebug/xdebug/tags or https://pecl.php.net/package/xdebug
-ARG XDEBUG_VERSION=3.4.7
+ARG XDEBUG_VERSION=3.5.0
 # Latest version of pcov: https://github.com/krakjoe/pcov/tags or https://pecl.php.net/package/pcov
 ARG PCOV_VERSION=1.0.12
 
@@ -190,7 +190,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG UNIQUE_ID_FOR_CACHEFROM=builder_nodejs
 
 # Latest version of Node.js: https://nodejs.org
-ARG NODE_MAJOR=22
+ARG NODE_MAJOR=24
 
 RUN apt-get update \
     && apt-get install --assume-yes --no-install-recommends \
@@ -208,7 +208,7 @@ RUN apt-get update \
     && apt-get install --assume-yes --no-install-recommends \
         nodejs \
     && npm uninstall --global npm \
-    && corepack install --global npm@10.x yarn@4.x pnpm@9.x \
+    && corepack install --global npm@11.x yarn@4.x pnpm@10.x \
     && corepack enable npm yarn pnpm \
     && apt-get autoremove --assume-yes \
     && apt-get clean --assume-yes \
